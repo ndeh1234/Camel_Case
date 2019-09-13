@@ -1,36 +1,35 @@
 import re
 
 
+s = input("Enter a sentence : ")  # Taking input of sentence
+str_arr = s.split()  # splitting the input sentence into words
+result = ""  # initializing result as empty string
+result += str_arr[0].lower()  # Converting first word ( word at index 0 ) of the input sentence into its lowercase
+for i in str_arr[1:]:  #starting iterating from index 1 and onwards
+    result += (i.capitalize())  # Capitalizing rest of the words
+
+print("Output : ", result)  # printing the required resultant string
+
+
 def capitalize(word):
-    ''' Convert word to have uppercase first letter, rest in lowercase'''
+    # Convert word to have uppercase first letter, rest in lowercase
     return word[0:1].upper() + word[1:].lower()
-    # Slices don't produce index out of bounds errors.
-    # So this still works on empty strings, strings of length 1
+
+def camel_case(sentence):
+    remove_multiple_spaces = re.sub(r'\s+', ' ', sentence)
 
 
 def lowercase(word):
     '''convert a word to lowercase'''
     return word.lower()
 
-
-def camel_case(sentence):
-    remove_multiple_spaces = re.sub(r'\s+', ' ', sentence)  # Replace any groups of whitespace with a single space
-    remove_surrounding_space = remove_multiple_spaces.strip()  # remove any remaining whitespace
-
-    words = remove_surrounding_space.split(' ')  # Break by spaces
-    first_word = lowercase(words[0])  # Lowercase the first word
-
-    # Capitalize the second and subsequent words, put in a new list.
-    capitalized_words = [capitalize(word) for word in words[1:]]
-
-    # Collect all of the words into one list
-    camel_cased_words = [first_word] + capitalized_words
-
-    # Put words back together
-    camel_cased_sentance = ''.join(camel_cased_words)
-
-    return camel_cased_sentance
-
+def filter(s):
+    punctuations = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+    res = "#$%&\'()*+,-./:;<=>?@[\\]^_`{|}"
+    for x in s:
+        if not(x in punctuations):
+            res += x
+    return res
 
 def main():
     sentence = input('Enter your sentence: ')
@@ -40,3 +39,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+
